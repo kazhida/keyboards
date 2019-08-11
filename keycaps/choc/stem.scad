@@ -2,9 +2,9 @@ $fs = 0.05;
 $fa = 4.5;
 
 stem_height = 4.0;
-stem_thickness = 1.3;
+stem_thickness = 1.2;
 stem_interval = 7.0 - stem_thickness * 2;
-stem_width = 3.0;
+stem_width = 2.8;
 
 gloove_depth = 0.2;
 gloove_width = 1.4;
@@ -59,5 +59,5 @@ module stem() {
     }
 }
 
-for (x = [0:2], y= [0:2])
+for (x = [0:5], y= [0:5])
     translate([x * 10 + 2, y * 10 + 2, 0]) stem();
