@@ -9,7 +9,7 @@ stem_width = 3.0;
 gloove_depth = 0.2;
 gloove_width = 1.4;
 
-base_width = 7.0;
+base_width = 8.0;
 base_height = 1.0;
 base_r = 2.0;
 
@@ -26,20 +26,23 @@ module stem_base() {
 }
 
 module stem_left() {
+    offsetX = (base_width - stem_interval - 2 * stem_thickness) / 2;
     offsetY = (base_width - stem_width) / 2;
     offsetY2 = (stem_width - gloove_width) / 2;
-    offsetX = stem_thickness - gloove_depth;
-    translate([0, offsetY, 0]) difference() {
+    offsetX1 = stem_thickness - gloove_depth;
+    offsetX2 = stem_thickness - gloove_depth;
+    translate([offsetX, offsetY, 0]) difference() {
         cube([stem_thickness, stem_width, stem_height]);
         translate([0, offsetY2, 0]) cube([gloove_depth, gloove_width, stem_height]);
-        translate([offsetX, offsetY2, 0]) cube([gloove_depth, gloove_width, stem_height]);
+        translate([offsetX2, offsetY2, 0]) cube([gloove_depth, gloove_width, stem_height]);
     }
 }
 
 module stem_right() {
-    offsetX = base_width - stem_thickness;
+    offsetX = (base_width + stem_interval) / 2;
     offsetY = (base_width - stem_width) / 2;
     offsetY2 = (stem_width - gloove_width) / 2;
+    offsetX1 = stem_thickness - gloove_depth;
     offsetX2 = stem_thickness - gloove_depth;
     translate([offsetX, offsetY, 0]) difference() {
         cube([stem_thickness, stem_width, stem_height]);
@@ -56,26 +59,5 @@ module stem() {
     }
 }
 
-//stem_size = [1.15, 2.98, 3.50 + 2.00];
-//stem_diff = [stem_size[0], stem_size[1] / 2.10, stem_size[2] + 1.00];
-//stem_offset = [5.70 / 2, 0, stem_size[2] / 2];
-//
-//module stem_one_side() {
-//    difference() {
-//        cube(stem_size, true);
-//        translate([stem_size[0] * 2.50 / 3, 0, 0])
-//            cube(stem_diff, true);
-//        translate([stem_size[0] * -2.50 / 3, 0, 0])
-//            cube(stem_diff, true);
-//    }
-//}
-//
-//module choc_stems() {
-//    translate(stem_offset)
-//        stem_one_side();
-//    translate([-1 * stem_offset[0], stem_offset[1], stem_offset[2]])
-//        stem_one_side();
-//}
-
 for (x = [0:2], y= [0:2])
-    translate([x * 10, y * 10, 0]) stem();
+    translate([x * 10 + 2, y * 10 + 2, 0]) stem();
