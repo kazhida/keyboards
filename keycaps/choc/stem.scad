@@ -59,5 +59,5 @@ module stem() {
     }
 }
 
-for (x = [0:9], y= [0:9])
+for (x = [0:7], y= [0:7])
     translate([x * 10 + 2, y * 10 + 2, 0]) stem();
